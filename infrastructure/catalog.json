@@ -1,0 +1,422 @@
+[
+  {
+    "category": "cpu",
+    "name": "Novea Core 8",
+    "slug": "novea-core-8",
+    "sku": "BC-CPU-1",
+    "price": 32900,
+    "specs": {
+      "socket": "NC5",
+      "cores": 8,
+      "frequency": 4200,
+      "tdp": 105,
+      "integratedGraphics": true
+    },
+    "stock": 16,
+    "brand": "Novea",
+    "summary": "La puissance au cœur de votre prochain projet."
+  },
+  {
+    "category": "cpu",
+    "name": "Novea Core 12",
+    "slug": "novea-core-12",
+    "sku": "BC-CPU-2",
+    "price": 44900,
+    "specs": {
+      "socket": "NC5",
+      "cores": 12,
+      "frequency": 4400,
+      "tdp": 125,
+      "integratedGraphics": false
+    },
+    "stock": 16,
+    "brand": "Novea",
+    "summary": "La puissance au cœur de votre prochain projet."
+  },
+  {
+    "category": "cpu",
+    "name": "Altis Compute 6",
+    "slug": "altis-compute-6",
+    "sku": "BC-CPU-3",
+    "price": 19900,
+    "specs": {
+      "socket": "AT4",
+      "cores": 6,
+      "frequency": 3600,
+      "tdp": 65,
+      "integratedGraphics": true
+    },
+    "stock": 8,
+    "brand": "Altis",
+    "summary": "La puissance au cœur de votre prochain projet."
+  },
+  {
+    "category": "motherboard",
+    "name": "Novea Base B650",
+    "slug": "novea-base-b650",
+    "sku": "BC-MOTHERBOARD-4",
+    "price": 18900,
+    "specs": {
+      "socket": "NC5",
+      "formFactor": "ATX",
+      "memoryType": "DDR5",
+      "memorySlots": 4,
+      "maxMemory": 128,
+      "storageInterfaces": [
+        "NVMe",
+        "SATA"
+      ]
+    },
+    "stock": 16,
+    "brand": "Novea",
+    "summary": "Une base solide, prête pour vos ambitions."
+  },
+  {
+    "category": "motherboard",
+    "name": "Altis Studio M4",
+    "slug": "altis-studio-m4",
+    "sku": "BC-MOTHERBOARD-5",
+    "price": 12900,
+    "specs": {
+      "socket": "AT4",
+      "formFactor": "mATX",
+      "memoryType": "DDR4",
+      "memorySlots": 2,
+      "maxMemory": 64,
+      "storageInterfaces": [
+        "SATA"
+      ]
+    },
+    "stock": 8,
+    "brand": "Altis",
+    "summary": "Une base solide, prête pour vos ambitions."
+  },
+  {
+    "category": "memory",
+    "name": "Velora Flow 32 Go",
+    "slug": "velora-flow-32-go",
+    "sku": "BC-MEMORY-6",
+    "price": 10900,
+    "specs": {
+      "memoryType": "DDR5",
+      "capacity": 32,
+      "modules": 2,
+      "frequency": 6000
+    },
+    "stock": 28,
+    "brand": "Velora",
+    "summary": "Gardez le rythme, même avec vos projets les plus exigeants."
+  },
+  {
+    "category": "memory",
+    "name": "Velora Flow 64 Go",
+    "slug": "velora-flow-64-go",
+    "sku": "BC-MEMORY-7",
+    "price": 19900,
+    "specs": {
+      "memoryType": "DDR5",
+      "capacity": 64,
+      "modules": 2,
+      "frequency": 6000
+    },
+    "stock": 2,
+    "brand": "Velora",
+    "summary": "Gardez le rythme, même avec vos projets les plus exigeants."
+  },
+  {
+    "category": "memory",
+    "name": "Velora Classic 16 Go",
+    "slug": "velora-classic-16-go",
+    "sku": "BC-MEMORY-8",
+    "price": 4900,
+    "specs": {
+      "memoryType": "DDR4",
+      "capacity": 16,
+      "modules": 2,
+      "frequency": 3200
+    },
+    "stock": 9,
+    "brand": "Velora",
+    "summary": "Gardez le rythme, même avec vos projets les plus exigeants."
+  },
+  {
+    "category": "gpu",
+    "name": "Altis Arc G70",
+    "slug": "altis-arc-g70",
+    "sku": "BC-GPU-9",
+    "price": 54900,
+    "specs": {
+      "length": 285,
+      "slots": 2,
+      "tdp": 220,
+      "recommendedWatts": 650
+    },
+    "stock": 14,
+    "brand": "Altis",
+    "summary": "Donnez une nouvelle dimension à vos images."
+  },
+  {
+    "category": "gpu",
+    "name": "Altis Arc G90 Studio",
+    "slug": "altis-arc-g90-studio",
+    "sku": "BC-GPU-10",
+    "price": 89900,
+    "specs": {
+      "length": 345,
+      "slots": 3,
+      "tdp": 350,
+      "recommendedWatts": 850
+    },
+    "stock": 3,
+    "brand": "Altis",
+    "summary": "Donnez une nouvelle dimension à vos images."
+  },
+  {
+    "category": "gpu",
+    "name": "Altis Arc G50",
+    "slug": "altis-arc-g50",
+    "sku": "BC-GPU-11",
+    "price": 29900,
+    "specs": {
+      "length": 230,
+      "slots": 2,
+      "tdp": 130,
+      "recommendedWatts": 450
+    },
+    "stock": 0,
+    "brand": "Altis",
+    "summary": "Donnez une nouvelle dimension à vos images."
+  },
+  {
+    "category": "psu",
+    "name": "Orven Pulse 750",
+    "slug": "orven-pulse-750",
+    "sku": "BC-PSU-12",
+    "price": 11900,
+    "specs": {
+      "watts": 750,
+      "efficiency": "Gold",
+      "formFactor": "ATX",
+      "connectors": [
+        "24-pin",
+        "8-pin EPS",
+        "2x8-pin PCIe"
+      ]
+    },
+    "stock": 20,
+    "brand": "Orven",
+    "summary": "Une alimentation stable et silencieuse."
+  },
+  {
+    "category": "psu",
+    "name": "Orven Pulse 450",
+    "slug": "orven-pulse-450",
+    "sku": "BC-PSU-13",
+    "price": 5900,
+    "specs": {
+      "watts": 450,
+      "efficiency": "Bronze",
+      "formFactor": "ATX",
+      "connectors": [
+        "24-pin",
+        "8-pin EPS",
+        "8-pin PCIe"
+      ]
+    },
+    "stock": 12,
+    "brand": "Orven",
+    "summary": "Une alimentation stable et silencieuse."
+  },
+  {
+    "category": "psu",
+    "name": "Orven Pulse 1000",
+    "slug": "orven-pulse-1000",
+    "sku": "BC-PSU-14",
+    "price": 18900,
+    "specs": {
+      "watts": 1000,
+      "efficiency": "Gold",
+      "formFactor": "ATX",
+      "connectors": [
+        "24-pin",
+        "8-pin EPS",
+        "3x8-pin PCIe"
+      ]
+    },
+    "stock": 7,
+    "brand": "Orven",
+    "summary": "Une alimentation stable et silencieuse."
+  },
+  {
+    "category": "case",
+    "name": "Orven Frame 01",
+    "slug": "orven-frame-01",
+    "sku": "BC-CASE-15",
+    "price": 9900,
+    "specs": {
+      "motherboardFormats": [
+        "ATX",
+        "mATX"
+      ],
+      "maxGpuLength": 330,
+      "psuFormats": [
+        "ATX"
+      ],
+      "maxCoolerHeight": 170
+    },
+    "stock": 16,
+    "brand": "Orven",
+    "summary": "De l’espace pour créer. Un design pour durer."
+  },
+  {
+    "category": "case",
+    "name": "Orven Frame Mini",
+    "slug": "orven-frame-mini",
+    "sku": "BC-CASE-16",
+    "price": 7900,
+    "specs": {
+      "motherboardFormats": [
+        "mATX"
+      ],
+      "maxGpuLength": 260,
+      "psuFormats": [
+        "SFX"
+      ],
+      "maxCoolerHeight": 140
+    },
+    "stock": 9,
+    "brand": "Orven",
+    "summary": "De l’espace pour créer. Un design pour durer."
+  },
+  {
+    "category": "storage",
+    "name": "Velora Sprint 1 To",
+    "slug": "velora-sprint-1-to",
+    "sku": "BC-STORAGE-17",
+    "price": 8900,
+    "specs": {
+      "interface": "NVMe",
+      "formFactor": "M.2",
+      "capacity": 1000
+    },
+    "stock": 24,
+    "brand": "Velora",
+    "summary": "Vos projets, accessibles en un instant."
+  },
+  {
+    "category": "storage",
+    "name": "Velora Archive 2 To",
+    "slug": "velora-archive-2-to",
+    "sku": "BC-STORAGE-18",
+    "price": 11900,
+    "specs": {
+      "interface": "SATA",
+      "formFactor": "2.5",
+      "capacity": 2000
+    },
+    "stock": 10,
+    "brand": "Velora",
+    "summary": "Vos projets, accessibles en un instant."
+  },
+  {
+    "category": "cooler",
+    "name": "Orven Air 150",
+    "slug": "orven-air-150",
+    "sku": "BC-COOLER-19",
+    "price": 4900,
+    "specs": {
+      "sockets": [
+        "NC5",
+        "AT4"
+      ],
+      "height": 155,
+      "type": "air"
+    },
+    "stock": 19,
+    "brand": "Orven",
+    "summary": "Des températures maîtrisées, en toute discrétion."
+  },
+  {
+    "category": "cooler",
+    "name": "Orven Air Compact",
+    "slug": "orven-air-compact",
+    "sku": "BC-COOLER-20",
+    "price": 3900,
+    "specs": {
+      "sockets": [
+        "AT4"
+      ],
+      "height": 125,
+      "type": "air"
+    },
+    "stock": 6,
+    "brand": "Orven",
+    "summary": "Des températures maîtrisées, en toute discrétion."
+  },
+  {
+    "category": "monitor",
+    "name": "Altis View 27",
+    "slug": "altis-view-27",
+    "sku": "BC-MONITOR-21",
+    "price": 24900,
+    "specs": {},
+    "stock": 18,
+    "brand": "Altis",
+    "summary": "Un équipement pensé pour votre quotidien."
+  },
+  {
+    "category": "keyboard",
+    "name": "Velora Type 80",
+    "slug": "velora-type-80",
+    "sku": "BC-KEYBOARD-22",
+    "price": 8900,
+    "specs": {},
+    "stock": 21,
+    "brand": "Velora",
+    "summary": "Un équipement pensé pour votre quotidien."
+  },
+  {
+    "category": "mouse",
+    "name": "Velora Point",
+    "slug": "velora-point",
+    "sku": "BC-MOUSE-23",
+    "price": 4900,
+    "specs": {},
+    "stock": 25,
+    "brand": "Velora",
+    "summary": "Un équipement pensé pour votre quotidien."
+  },
+  {
+    "category": "headset",
+    "name": "Orven Sound",
+    "slug": "orven-sound",
+    "sku": "BC-HEADSET-24",
+    "price": 7900,
+    "specs": {},
+    "stock": 11,
+    "brand": "Orven",
+    "summary": "Un équipement pensé pour votre quotidien."
+  },
+  {
+    "category": "prebuilt",
+    "name": "Novea Creative Station",
+    "slug": "novea-creative-station",
+    "sku": "BC-PREBUILT-25",
+    "price": 179900,
+    "specs": {},
+    "stock": 4,
+    "brand": "Novea",
+    "summary": "Un équipement pensé pour votre quotidien."
+  },
+  {
+    "category": "prebuilt",
+    "name": "Novea Essential",
+    "slug": "novea-essential",
+    "sku": "BC-PREBUILT-26",
+    "price": 79900,
+    "specs": {},
+    "stock": 7,
+    "brand": "Novea",
+    "summary": "Un équipement pensé pour votre quotidien."
+  }
+]

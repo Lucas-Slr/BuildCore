@@ -1,0 +1,13 @@
+{
+    admin off
+    auto_https off
+}
+http://127.0.0.1:3000 {
+    bind 127.0.0.1
+    mercure {
+        publisher_jwt development-mercure-secret-at-least-32-characters
+        subscriber_jwt development-mercure-secret-at-least-32-characters
+        cors_origins http://127.0.0.1:4200 http://localhost:4200
+    }
+    respond /healthz 200
+}

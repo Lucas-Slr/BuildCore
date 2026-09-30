@@ -1,0 +1,25 @@
+security:
+  password_hashers:
+    App\Customer\Customer: auto
+  providers:
+    customers:
+      entity:
+        class: App\Customer\Customer
+        property: email
+  firewalls:
+    dev:
+      pattern: ^/(_(profiler|wdt)|css|images|js)/
+      security: false
+    main:
+      lazy: true
+      provider: customers
+      custom_authenticators: [App\Customer\LoginAuthenticator]
+      entry_point: App\Customer\LoginAuthenticator
+      login_throttling: { max_attempts: 5, interval: '1 minute' }
+      logout:
+        path: /api/v1/auth/logout
+        target: /api/v1/auth/csrf
+        invalidate_session: true
+  access_control:
+    - { path: ^/api/v1/admin, roles: ROLE_ADMIN }
+    - { path: ^/api/v1/(me|orders|checkout), roles: ROLE_CUSTOMER }

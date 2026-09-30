@@ -1,0 +1,57 @@
+<a class="skip-link" href="#main">Aller au contenu</a>
+<div class="announcement">
+  Un projet, une configuration. <span>Livraison offerte dès 1 500 € · Démonstration</span>
+</div>
+<header class="site-header">
+  <div class="header-inner">
+    <a routerLink="/" class="brand"
+      ><span class="brand-mark">▧</span>{{ brand.name }}<span class="brand-dot">.</span></a
+    >
+    <nav aria-label="Navigation principale">
+      <a routerLink="/catalogue" routerLinkActive="active">Composants</a
+      ><a routerLink="/catalogue" [queryParams]="{ category: 'prebuilt' }">PC préassemblés</a
+      ><a routerLink="/configurateur" routerLinkActive="active"
+        >Configurateur <span class="mini-badge">PC</span></a
+      >
+    </nav>
+    <div class="header-actions">
+      <a [routerLink]="api.user() ? '/compte' : '/connexion'" class="account-link"
+        >♙ <span>{{ api.user()?.name || 'Mon compte' }}</span></a
+      ><a routerLink="/panier" class="cart-link"
+        >Panier <span>{{ count() }}</span></a
+      >
+    </div>
+  </div>
+</header>
+<div class="toast success" role="status" [hidden]="!api.notice()">
+  {{ api.notice()
+  }}<button (click)="api.notice.set('')" aria-label="Fermer la notification">×</button>
+</div>
+<div class="toast error" role="alert" [hidden]="!api.error()">
+  {{ api.error() }}<button (click)="api.error.set('')" aria-label="Fermer l’erreur">×</button>
+</div>
+<main id="main" tabindex="-1"><router-outlet /></main>
+<footer>
+  <div class="footer-main">
+    <div>
+      <a routerLink="/" class="brand">{{ brand.name }}.</a>
+      <p>Les bons composants.<br />Les projets qui vous ressemblent.</p>
+    </div>
+    <div>
+      <strong>À votre rythme</strong><a routerLink="/catalogue">Explorer le catalogue</a
+      ><a routerLink="/configurateur">Créer mon PC</a
+      ><a routerLink="/commandes">Suivre une commande</a>
+    </div>
+    <div>
+      <strong>Un projet transparent</strong>
+      <p>
+        Produits fictifs, paiements de test.<br />France métropolitaine continentale.<br />Aucun
+        achat réel.
+      </p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 {{ brand.name }} · Projet portfolio</span
+    ><span>Conçu avec précision. Assemblé par vous.</span>
+  </div>
+</footer>

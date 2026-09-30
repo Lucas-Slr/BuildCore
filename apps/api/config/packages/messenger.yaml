@@ -1,0 +1,20 @@
+framework:
+  messenger:
+    failure_transport: failed
+    transports:
+      async:
+        dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+        retry_strategy: { max_retries: 5, delay: 1000, multiplier: 2 }
+      failed: 'doctrine://default?queue_name=failed&auto_setup=0'
+      emails:
+        dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+        options: { queue_name: emails }
+        retry_strategy: { max_retries: 5, delay: 1000, multiplier: 2 }
+      realtime:
+        dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+        options: { queue_name: realtime }
+        retry_strategy: { max_retries: 5, delay: 1000, multiplier: 2 }
+    routing:
+      App\Notification\OrderChanged: [emails, realtime]
+      App\Inventory\ExpireReservations: async
+      App\Notification\LowStock: emails

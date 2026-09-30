@@ -1,0 +1,12 @@
+.git
+.cache
+.tools
+**/node_modules
+**/vendor
+**/var
+**/.env.local
+**/.env.*.local
+**/dist
+**/.angular
+**/test-results
+**/playwright-report

@@ -1,0 +1,18 @@
+framework:
+  workflows:
+    purchase:
+      type: state_machine
+      marking_store: { type: method, property: status }
+      supports: [App\Order\Purchase]
+      initial_marking: PENDING_PAYMENT
+      places: [DRAFT, PENDING_PAYMENT, PAID, PREPARING, SHIPPED, DELIVERED, CANCELED, PAYMENT_FAILED, REFUND_PENDING, REFUNDED]
+      transitions:
+        checkout: { from: DRAFT, to: PENDING_PAYMENT }
+        pay: { from: PENDING_PAYMENT, to: PAID }
+        fail: { from: PENDING_PAYMENT, to: PAYMENT_FAILED }
+        cancel: { from: PENDING_PAYMENT, to: CANCELED }
+        prepare: { from: PAID, to: PREPARING }
+        ship: { from: PREPARING, to: SHIPPED }
+        deliver: { from: SHIPPED, to: DELIVERED }
+        request_refund: { from: [PAID, PREPARING, SHIPPED, DELIVERED], to: REFUND_PENDING }
+        refund: { from: REFUND_PENDING, to: REFUNDED }

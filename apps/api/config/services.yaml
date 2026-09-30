@@ -1,0 +1,20 @@
+parameters: {}
+services:
+  _defaults:
+    autowire: true
+    autoconfigure: true
+  App\:
+    resource: '../src/'
+    exclude:
+      - '../src/Kernel.php'
+      - '../src/Catalog/Product.php'
+      - '../src/Catalog/Variant.php'
+      - '../src/Customer/Customer.php'
+      - '../src/Order/Purchase.php'
+      - '../src/Inventory/StockAdjustment.php'
+      - '../src/Payment/WebhookReceipt.php'
+      - '../src/Shared/DomainError.php'
+      - '../src/Notification/OrderChanged.php'
+      - '../src/Inventory/ExpireReservations.php'
+      - '../src/Notification/NotificationReceipt.php'
+      - '../src/Notification/LowStock.php'

@@ -1,0 +1,19 @@
+framework:
+  secret: '%env(APP_SECRET)%'
+  csrf_protection: true
+  session:
+    name: BUILDCORE_SESSION
+    cookie_httponly: true
+    cookie_secure: auto
+    cookie_samesite: lax
+    handler_id: null
+  serializer: { enabled: true }
+when@test:
+  framework:
+    test: true
+    session:
+      storage_factory_id: session.storage.factory.mock_file
+when@prod:
+  framework:
+    session:
+      cookie_secure: true

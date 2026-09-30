@@ -1,0 +1,78 @@
+name: BuildCore CI
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:17-alpine
+        env:
+          POSTGRES_DB: buildcore_test
+          POSTGRES_USER: buildcore
+          POSTGRES_PASSWORD: buildcore_ci
+        ports: ['5432:5432']
+        options: >-
+          --health-cmd "pg_isready -U buildcore -d buildcore_test"
+          --health-interval 5s --health-timeout 3s --health-retries 20
+    env:
+      APP_ENV: test
+      DATABASE_URL: postgresql://buildcore:buildcore_ci@127.0.0.1:5432/buildcore_test?serverVersion=17&charset=utf8
+      STRIPE_SECRET_KEY: ''
+      STRIPE_WEBHOOK_SECRET: ''
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_pgsql, intl, mbstring, xml, zip
+          coverage: none
+          tools: composer:v2
+      - run: composer install --working-dir=apps/api --no-interaction --prefer-dist
+      - run: php apps/api/bin/console doctrine:migrations:migrate --no-interaction
+      - run: php apps/api/bin/console app:fixtures
+      - run: php apps/api/bin/console doctrine:schema:validate
+      - run: php apps/api/bin/console lint:container
+      - run: php apps/api/vendor/bin/phpstan analyse -c apps/api/phpstan.neon --memory-limit=512M --no-progress
+      - run: php apps/api/vendor/bin/php-cs-fixer fix --config=apps/api/.php-cs-fixer.dist.php --dry-run --diff
+      - run: php apps/api/vendor/bin/phpunit -c apps/api/phpunit.xml.dist
+      - run: APP_ENV=prod APP_DEBUG=0 php apps/api/bin/console cache:warmup
+  storefront:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: apps/storefront/package-lock.json
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_sqlite, intl, mbstring, xml
+          tools: composer:v2
+      - run: npm ci --prefix apps/storefront
+      - run: npm --prefix apps/storefront run lint
+      - run: npm --prefix apps/storefront run format:check
+      - run: npm --prefix apps/storefront test
+      - run: npm --prefix apps/storefront run build
+      - run: composer install --working-dir=apps/api --no-interaction --prefer-dist
+      - name: Préparer l’API de démonstration
+        env:
+          DATABASE_URL: sqlite:///%kernel.project_dir%/var/e2e.db
+        run: |
+          php apps/api/bin/console doctrine:migrations:migrate --no-interaction
+          php apps/api/bin/console app:fixtures
+          php -S 127.0.0.1:8000 -t apps/api/public apps/api/public/index.php > /tmp/api.log 2>&1 &
+          npm --prefix apps/storefront start -- --host 127.0.0.1 > /tmp/angular.log 2>&1 &
+          for i in $(seq 1 60); do curl -fsS http://127.0.0.1:4200/ >/dev/null && break; sleep 2; done
+      - run: cd apps/storefront && npx playwright install --with-deps chromium
+      - run: npm --prefix apps/storefront run e2e
+      - uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: playwright-traces
+          path: apps/storefront/test-results

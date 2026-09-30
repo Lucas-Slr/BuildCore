@@ -1,0 +1,81 @@
+name: buildcore
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: buildcore
+      POSTGRES_USER: buildcore
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-buildcore_dev}
+    ports: ['127.0.0.1:5432:5432']
+    volumes: [postgres_data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U buildcore -d buildcore']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7-alpine
+    ports: ['127.0.0.1:6379:6379']
+    command: ['redis-server', '--appendonly', 'yes']
+    volumes: [redis_data:/data]
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  mailpit:
+    image: axllent/mailpit:v1.27
+    ports: ['127.0.0.1:8025:8025', '127.0.0.1:1025:1025']
+  mercure:
+    image: dunglas/mercure:v0.18
+    environment:
+      SERVER_NAME: ':80'
+      MERCURE_PUBLISHER_JWT_KEY: ${MERCURE_JWT_SECRET:-development-mercure-secret-at-least-32-characters}
+      MERCURE_SUBSCRIBER_JWT_KEY: ${MERCURE_JWT_SECRET:-development-mercure-secret-at-least-32-characters}
+      MERCURE_EXTRA_DIRECTIVES: |
+        cors_origins http://localhost:4200 http://127.0.0.1:4200
+    ports: ['127.0.0.1:3000:80']
+  api:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    ports: ['127.0.0.1:8000:8000']
+    environment: &api_environment
+      APP_ENV: dev
+      APP_SECRET: ${APP_SECRET:-development-only-change-before-deployment}
+      APP_ORIGIN: http://127.0.0.1:4200
+      DATABASE_URL: postgresql://buildcore:${POSTGRES_PASSWORD:-buildcore_dev}@postgres:5432/buildcore?serverVersion=17&charset=utf8
+      MAILER_DSN: smtp://mailpit:1025
+      MESSENGER_TRANSPORT_DSN: doctrine://default?auto_setup=0
+      MERCURE_URL: http://mercure/.well-known/mercure
+      MERCURE_PUBLIC_URL: http://127.0.0.1:4200/.well-known/mercure
+      MERCURE_JWT_SECRET: ${MERCURE_JWT_SECRET:-development-mercure-secret-at-least-32-characters}
+      STRIPE_SECRET_KEY: ${STRIPE_SECRET_KEY:-}
+      STRIPE_WEBHOOK_SECRET: ${STRIPE_WEBHOOK_SECRET:-}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+    volumes: [uploads:/app/apps/api/var/uploads]
+  worker:
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    environment: *api_environment
+    command: ['php', 'bin/console', 'messenger:consume', 'async', 'emails', 'realtime', '--time-limit=3600', '--memory-limit=256M']
+    restart: unless-stopped
+    depends_on: [api]
+    profiles: [workers]
+  scheduler:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: infrastructure/docker/api.Dockerfile
+    environment: *api_environment
+    command: ['sh', '-c', 'while true; do php bin/console app:reservations:expire; php bin/console app:stock:alert; sleep 60; done']
+    depends_on: [api]
+    profiles: [workers]
+volumes:
+  postgres_data:
+  redis_data:
+  uploads:

@@ -1,0 +1,15 @@
+.cache/
+.tools/
+node_modules/
+vendor/
+var/
+dist/
+.angular/
+.env.local
+.env.*.local
+playwright-report/
+test-results/
+*.log
+probe.txt
+/.env
+.php-cs-fixer.cache
