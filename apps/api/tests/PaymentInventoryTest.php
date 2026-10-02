@@ -115,6 +115,6 @@ final class PaymentInventoryTest extends KernelTestCase
         $event = ['id' => 'evt_'.bin2hex(random_bytes(8)),'livemode' => false,'type' => 'refund.updated','data' => ['object' => ['id' => 're_test','status' => 'succeeded','amount' => $o->total,'payment_intent' => $o->paymentIntent,'metadata' => ['order_id' => $o->id]]]];
         $p->process($event);
         $p->process($event);
-        self::assertSame('REFUNDED',$o->status);
+        self::assertSame('REFUNDED', $o->status);
     }
 }

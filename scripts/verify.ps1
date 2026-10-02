@@ -7,7 +7,7 @@ function Invoke-Checked([scriptblock] $Command) {
 Invoke-Checked { php apps/api/bin/console lint:container }
 Invoke-Checked { php apps/api/bin/console doctrine:schema:validate }
 Invoke-Checked { php apps/api/vendor/bin/phpstan analyse -c apps/api/phpstan.neon --memory-limit=512M --no-progress }
-Invoke-Checked { php apps/api/vendor/bin/php-cs-fixer fix --config=apps/api/.php-cs-fixer.dist.php --dry-run --diff }
+Invoke-Checked { php apps/api/vendor/bin/php-cs-fixer fix --config=apps/api/.php-cs-fixer.dist.php --dry-run --diff --using-cache=no }
 Invoke-Checked { php apps/api/bin/console doctrine:migrations:migrate --env=test --no-interaction }
 Invoke-Checked { php apps/api/bin/console app:fixtures --env=test }
 Invoke-Checked { php apps/api/vendor/bin/phpunit -c apps/api/phpunit.xml.dist }

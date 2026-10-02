@@ -100,6 +100,6 @@ final class CompatibilityTest extends TestCase
     public function testUnstructuredSpecsRejected(): void
     {
         $this->expectException(DomainError::class);
-        (new SpecificationSchema())->validate('cpu',['socket' => 'NC5']);
+        (new SpecificationSchema())->validate('cpu', ['socket' => 'NC5']);
     }
 }

@@ -74,7 +74,7 @@ final class PaymentService
             }
             $this->em->persist(new WebhookReceipt($event['id']));
             if ($before !== $order->status) {
-                $this->bus->dispatch(new OrderChanged($order->id,$order->status));
+                $this->bus->dispatch(new OrderChanged($order->id, $order->status));
             }
         });
     }

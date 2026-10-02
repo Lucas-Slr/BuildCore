@@ -230,7 +230,7 @@ php apps/api/bin/console doctrine:migrations:migrate --env=test --no-interaction
 php apps/api/bin/console app:fixtures --env=test
 php apps/api/vendor/bin/phpunit -c apps/api/phpunit.xml.dist
 php apps/api/vendor/bin/phpstan analyse -c apps/api/phpstan.neon --memory-limit=512M
-php apps/api/vendor/bin/php-cs-fixer fix --config=apps/api/.php-cs-fixer.dist.php --dry-run --diff
+php apps/api/vendor/bin/php-cs-fixer fix --config=apps/api/.php-cs-fixer.dist.php --dry-run --diff --using-cache=no
 npm --prefix apps/storefront run lint
 npm --prefix apps/storefront run format:check
 npm --prefix apps/storefront test
