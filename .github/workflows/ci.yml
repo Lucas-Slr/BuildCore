@@ -70,7 +70,8 @@ jobs:
         run: |
           php apps/api/bin/console doctrine:migrations:migrate --no-interaction
           php apps/api/bin/console app:fixtures
-          php -S 127.0.0.1:8000 -t apps/api/public apps/api/public/index.php > /tmp/api.log 2>&1 &
+          # Expose job environment variables to Symfony during HTTP requests.
+          php -d variables_order=EGPCS -S 127.0.0.1:8000 -t apps/api/public apps/api/public/index.php > /tmp/api.log 2>&1 &
           npm --prefix apps/storefront start -- --host 127.0.0.1 > /tmp/angular.log 2>&1 &
           for url in http://127.0.0.1:8000/api/v1/products http://127.0.0.1:4200/; do
             ready=false
